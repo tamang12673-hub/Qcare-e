@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>QCare — Admin</title>
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="admin.js" defer></script>
+</head>
+<body>
+  <div class="container">
+    <header><h1>QCare — Doctor Panel</h1></header>
+
+    <main>
+      <section id="login-section" class="card">
+        <h2>Doctor Login (OTP)</h2>
+        <input id="phone-input" placeholder="Phone (10 digits)" maxlength="10" inputmode="tel"/>
+        <div id="recaptcha-container"></div>
+        <button id="send-otp">Send OTP</button>
+
+        <div id="verify-block" class="hidden">
+          <input id="otp-code" placeholder="Enter OTP" inputmode="numeric" maxlength="6"/>
+          <button id="verify-otp">Verify OTP</button>
+        </div>
+        <p id="login-msg" class="muted"></p>
+      </section>
+
+      <section id="panel-section" class="card hidden">
+        <div class="row">
+          <p>Signed in as <strong id="doctor-phone"></strong></p>
+          <button id="sign-out">Sign Out</button>
+        </div>
+
+        <h3>Queue for <span id="doctor-name"></span></h3>
+        <ol id="queue-list"></ol>
+        <div class="row gap">
+          <button id="mark-done">Mark Current Done</button>
+          <button id="download-list">Download CSV</button>
+        </div>
+
+        <h4>Add Patient</h4>
+        <form id="add-form">
+          <input id="add-name" placeholder="Name" required/>
+          <input id="add-phone" placeholder="Phone (10 digits)" maxlength="10" required/>
+          <input id="add-age" placeholder="Age" type="number" required/>
+          <select id="add-sex" required><option value="">Sex</option><option>Male</option><option>Female</option></select>
+          <input id="add-city" placeholder="City / Village"/>
+          <button type="submit">Add</button>
+        </form>
+
+        <h4>Mark Holiday</h4>
+        <input type="date" id="holiday-date"/>
+        <button id="mark-holiday">Mark Holiday</button>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

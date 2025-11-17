@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>QCare — Appointment Status</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <header><h1>QCare</h1><p class="sub">Appointment Status</p></header>
+
+    <main>
+      <section class="card">
+        <h2>Your Appointments</h2>
+        <p class="muted small">Search by phone to filter</p>
+        <input id="filter-phone" placeholder="Enter phone (10 digits)" inputmode="tel" />
+        <div id="appointments" style="margin-top:12px"></div>
+        <p id="no-appts" class="muted" style="display:none">No appointments found.</p>
+      </section>
+      <p class="muted small"><a href="index.html">Back to booking</a></p>
+    </main>
+  </div>
+
+  <script>
+    function loadAppointments() {
+      try {
+        const raw = localStorage.getItem('qcare_appointments');
+        if (!raw) return [];
+        return JSON.parse(raw) || [];
+      } catch {
+        return [];
+      }
+    }
+    function renderList(list) {
+      const container = document.getElementById('appointments');
+      const none = document.getElementById('no-appts');
+      container.innerHTML = '';
+      if (!list || list.length === 0) {
+        none.style.display = 'block';
+        return;
+      }
+      none.style.display = 'none';
+      list.forEach((b) => {
+        const el = document.createElement('div');
+        el.className = 'doctor-card';
+        el.innerHTML = `
+          <div style="flex:1">
+            <div style="font-weight:600">${b.doctor.name} — ${b.doctor.specialty}</div>
+            <div class="muted small">Patient: ${escapeHtml(b.patient.name)} • ${escapeHtml(b.patient.phone)}</div>
+            <div class="muted small">Booked: ${new Date(b.created_at).toLocaleString()} • Status: ${b.status}</div>
+          </div>
+        `;
+        container.appendChild(el);
+      });
+    }
+    function escapeHtml(s){ if(!s) return ''; return s.replace(/[&<>"']/g, (c) => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' })[c]); }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const all = loadAppointments();
+      renderList(all);
+
+      const filter = document.getElementById('filter-phone');
+      filter.addEventListener('input', () => {
+        const q = filter.value.trim();
+        if (!q) return renderList(all);
+        const filtered = all.filter(a => a.patient && a.patient.phone && a.patient.phone.includes(q));
+        renderList(filtered);
+      });
+    });
+  </script>
+</body>
+</html>

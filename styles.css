@@ -1,0 +1,97 @@
+/* Simple mobile-first styles for QCare booking page */
+
+:root{
+  --bg:#f6f8fb;
+  --card:#ffffff;
+  --muted:#6b7280;
+  --accent:#0b73ff;
+  --danger:#c53030;
+  --radius:12px;
+  --gap:16px;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  background:linear-gradient(180deg, #eef2ff 0%, var(--bg) 100%);
+  color:#0f172a;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+.container{
+  max-width:720px;
+  margin:24px auto;
+  padding:18px;
+}
+
+header{margin-bottom:12px}
+header h1{margin:0;font-size:28px}
+.sub{margin:4px 0 0;color:var(--muted)}
+
+main{display:grid;gap:var(--gap)}
+.card{
+  background:var(--card);
+  border-radius:var(--radius);
+  padding:14px;
+  box-shadow:0 6px 20px rgba(11,73,255,0.06);
+}
+
+.hidden{display:none}
+
+.doctor-card{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:10px;
+  border-radius:10px;
+  margin-bottom:10px;
+  border:1px solid #edf2f7;
+}
+
+.doc-info{flex:1}
+.doc-name{font-weight:600}
+.doc-spec{color:var(--muted);font-size:13px;margin-top:4px}
+
+.book-btn{
+  background:linear-gradient(180deg,var(--accent), #075bd8);
+  color:white;
+  border:0;padding:8px 12px;border-radius:8px;
+  font-weight:600;cursor:pointer;
+}
+.book-btn:active{transform:translateY(1px)}
+
+input,select,button{
+  font:inherit;
+}
+
+#booking-form{
+  display:grid;
+  gap:10px;
+  margin-top:10px;
+}
+#booking-form input, #booking-form select{
+  padding:10px;
+  border-radius:8px;
+  border:1px solid #e6edf6;
+  background:#fbfdff;
+}
+button[type="submit"]{
+  background:var(--accent);
+  color:white;padding:10px;border-radius:8px;border:0;font-weight:700;
+  cursor:pointer;
+}
+button[type="button"]{
+  margin-top:10px;
+  background:transparent;border:1px solid #e6edf6;padding:8px;border-radius:8px;cursor:pointer;
+}
+
+.muted{color:var(--muted)}
+.small{font-size:13px}
+#booking-msg{min-height:20px;color:var(--danger);margin-top:6px}
+@media(min-width:800px){
+  .container{padding:30px}
+  header h1{font-size:32px}
+}

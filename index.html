@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>QCare — Book Appointment</title>
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="app.js" defer></script>
+</head>
+<body>
+  <div class="container">
+    <header><h1>QCare</h1><p class="sub">Book appointment — Mobile friendly</p></header>
+
+    <main>
+      <section class="card">
+        <h2>Choose Doctor</h2>
+        <div id="doctors"></div>
+      </section>
+
+      <section id="booking-section" class="card hidden">
+        <h2>Book with <span id="selected-doctor-name"></span></h2>
+        <form id="booking-form">
+          <input id="patient-name" placeholder="Full name" required />
+          <input id="patient-phone" placeholder="Phone (10 digits)" maxlength="10" inputmode="tel" required />
+          <input id="patient-age" placeholder="Age" type="number" required />
+          <select id="patient-sex" required>
+            <option value="">Sex</option><option>Male</option><option>Female</option><option>Other</option>
+          </select>
+          <input id="patient-city" placeholder="City / Village" required />
+          <button type="submit">Pay ₹10 & Book</button>
+        </form>
+        <p id="booking-msg" class="muted"></p>
+        <button id="back-to-list" type="button">Back</button>
+      </section>
+
+      <section id="confirmation-section" class="card hidden">
+        <h2>Booking Confirmed</h2>
+        <p id="conf-text"></p>
+        <button id="done-ok" type="button">OK</button>
+      </section>
+
+      <p class="muted small"><a href="status.html">Check Appointment Status</a></p>
+    </main>
+  </div>
+</body>
+</html>
